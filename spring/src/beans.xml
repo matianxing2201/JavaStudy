@@ -15,4 +15,10 @@
         <property name="name" value="zhangsan" />
         <property name="shill" value="Java JavaScript" />
     </bean>
+
+    <bean class="com.mtx.spring.bean.Monster" id="monster02">
+        <property name="id" value="101" />
+        <property name="name" value="lisi" />
+        <property name="shill" value="Python Ruby" />
+    </bean>
 </beans>
