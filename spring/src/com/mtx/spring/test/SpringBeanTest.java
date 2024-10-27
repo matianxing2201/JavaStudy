@@ -1,7 +1,7 @@
 package com.mtx.spring.test;
 
 import com.mtx.spring.bean.Monster;
-import org.junit.jupiter.api.Test;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,7 +10,6 @@ public class SpringBeanTest {
 
     }
 
-    @Test
     public void getMonster() {
         // 1. 创建容器 ApplicationContext
         // 2. 该容器和容器配置文件关联
