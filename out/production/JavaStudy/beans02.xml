@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 配置 bean 的初始化方法和销毁方法 -->
+    <bean id="house" class="com.mtx.spring.bean.House" init-method="init" destroy-method="destroy">
+        <property name="name" value="big house" />
+    </bean>
+    <bean id="myBeanPostProcessor" class="com.mtx.spring.bean.MyBeanPostProcessor" />
+</beans>
