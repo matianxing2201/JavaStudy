@@ -1,16 +1,22 @@
 package com.mtx.spring.test;
 
+import com.mtx.spring.bean.Car;
+import com.mtx.spring.bean.House;
 import com.mtx.spring.bean.Monster;
-import org.junit.jupiter.api.Test;
+import com.mtx.spring.component.MyComponent;
+import com.mtx.spring.component.UserAction;
+import com.mtx.spring.component.UserDao;
+import com.mtx.spring.component.UserService;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 
 public class SpringBeanTest {
     public static void main(String[] args) {
-
+        getBeanByAnnotation();
     }
 
-    @Test
     public void getMonster() {
         // 1. 创建容器 ApplicationContext
         // 2. 该容器和容器配置文件关联
@@ -36,5 +42,37 @@ public class SpringBeanTest {
             System.out.println("beanDefinitonsName=" + beanName);
         }
 
+    }
+
+    public static void getBeanByPrototype() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+//        for (int i = 0; i < 3; i++) {
+//            Car car = ioc.getBean("car", Car.class);
+//            System.out.println(car);
+//        }
+    }
+
+    public static void getBeanByPostProcessor() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans02.xml");
+//        House house = ioc.getBean("house", House.class);
+//        System.out.println(house);
+//
+//        // 关闭容器
+//        ((ConfigurableApplicationContext) ioc).close();
+    }
+
+    public static void getBeanByAnnotation() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        UserAction userAction = ioc.getBean(UserAction.class);
+        System.out.println("userAction=" + userAction);
+
+        UserDao userDao = ioc.getBean(UserDao.class);
+        System.out.println("userDao=" + userDao);
+
+        MyComponent myComponent = ioc.getBean(MyComponent.class);
+        System.out.println("myComponent=" + myComponent);
+
+        UserService userService = ioc.getBean(UserService.class);
+        System.out.println("userService=" + userService);
     }
 }

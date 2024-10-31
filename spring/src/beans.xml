@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <context:component-scan base-package="com.mtx.spring.component"/>
+
+
+    <!--
+    1. 在 spring 的 ioc 容器, 在默认情况下是安装单例创建的，即配置一个 bean 对象后，ioc 容器只会创建一个 bean 实例。
+    2. 如果,我们希望 ioc 容器配置的某个 bean 对象，是以多个实例形式创建的则可以通过配置 scope="prototype" 来指定
+    -->
+    <bean id="car" scope="prototype" class="com.mtx.spring.bean.Car" />
+
+
+<!--    继承的方式实现bean配置信息复用-->
+    <bean id="monster10" class="com.mtx.spring.bean.Monster">
+        <property name="id" value="10"/>
+        <property name="name" value="monster10-name" />
+        <property name="shill" value="monster10-shill" />
+    </bean>
+
+    <bean id="monster11" class="com.mtx.spring.bean.Monster" parent="monster10"/>
+
+    <bean id="myFactoryBean" class="com.mtx.spring.factory.MyFactoryBean">
+        <property name="keyVal" value="monster_2" />
+    </bean>
+
     <!--
         1.配置monster对象/javabean
         2.在beans中可以配置多个bean
@@ -21,4 +49,31 @@
         <property name="name" value="lisi" />
         <property name="shill" value="Python Ruby" />
     </bean>
+
+    <util:list id="myListBook">
+        <value>Java</value>
+        <value>Python</value>
+        <value>Ruby</value>
+    </util:list>
+
+    <bean id="bookStore" class="com.mtx.spring.bean.BookStore">
+        <property name="bookList" ref="myListBook" />
+    </bean>
+
+
+
+    <bean id="emp" class="com.mtx.spring.bean.Emp">
+        <property name="name" value="Zhangsan" />
+        <property name="dept" ref="dept" />
+        <property name="dept.name" value="IT"></property>
+    </bean>
+
+    <bean id="dept" class="com.mtx.spring.bean.Dept" />
+
+
+    <bean id="myInstanceFactory" class="com.mtx.spring.bean.MyInstanceFactory"/>
+    <bean id="my_monster" factory-bean="myInstanceFactory" factory-method="getMonster">
+        <constructor-arg value="monster1" />
+    </bean>
+
 </beans>
